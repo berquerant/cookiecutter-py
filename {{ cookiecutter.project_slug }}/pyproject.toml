@@ -31,11 +31,11 @@ exclude = ["build", "tests"]
 {{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:main"
 {%- endif %}
 
-[tools.black]
+[tool.black]
 line-length = 120
 target-version = ["{{ cookiecutter.black_target }}"]
 
-[tools.flake8]
+[tool.flake8]
 max-line-length = 120
 ignore = [
   "E203",
@@ -44,5 +44,5 @@ ignore = [
 ]
 statistics = true
 
-[tools.mypy]
+[tool.mypy]
 ignore_missing_imports = true
