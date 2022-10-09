@@ -1,0 +1,22 @@
+{
+  "github_username": "berquerant",
+  "author_name": "",
+  "author_email": "",
+  "project_name": "Python project template",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "project_description": "",
+  "project_category": [
+    "Command-Line",
+    "Library"
+  ],
+  "python_version": [
+    "3.10"
+  ],
+  "black_target": [
+    "py310"
+  ],
+  "pytest_target": [
+    "py310"
+  ],
+  "version": "0.1.0"
+}
