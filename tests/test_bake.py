@@ -4,6 +4,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Union
 
+import pytest
 from cookiecutter.utils import rmtree
 
 
@@ -33,17 +34,24 @@ def run(
         return subprocess.run(cmd, check=True, *args, **kwargs)
 
 
+def check_result(result):
+    assert result.exit_code == 0
+    assert result.exception is None
+    assert result.project_path.is_dir()
+    assert result.project_path.name == "python_project_template"
+    project_path = result.project_path
+    run(["pipenv", "install", "--dev"], project_path)
+    run(["pipenv", "run", "check"], project_path)
+    run(["pipenv", "run", "test"], project_path)
+    run(["python", "setup.py", "sdist"], project_path)
+
+
 def test_bake_and_make_default(cookies):
     with bake(cookies) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-        assert result.project_path.is_dir()
-        assert result.project_path.name == "python_project_template"
-        run(["make", "init"], result.project_path)
-        run(["make", "test"], result.project_path)
-        run(["make", "dist"], result.project_path)
+        check_result(result)
 
 
+@pytest.mark.skip(reason="no python311 image for CI")
 def test_bake_and_make_py311(cookies):
     context = {
         "python_version": "3.11",
@@ -51,10 +59,4 @@ def test_bake_and_make_py311(cookies):
         "pytest_target": "py311",
     }
     with bake(cookies, extra_context=context) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-        assert result.project_path.is_dir()
-        assert result.project_path.name == "python_project_template"
-        run(["make", "init"], result.project_path)
-        run(["make", "test"], result.project_path)
-        run(["make", "dist"], result.project_path)
+        check_result(result)
