@@ -33,8 +33,24 @@ def run(
         return subprocess.run(cmd, check=True, *args, **kwargs)
 
 
-def test_bake_and_make(cookies):
+def test_bake_and_make_default(cookies):
     with bake(cookies) as result:
+        assert result.exit_code == 0
+        assert result.exception is None
+        assert result.project_path.is_dir()
+        assert result.project_path.name == "python_project_template"
+        run(["make", "init"], result.project_path)
+        run(["make", "test"], result.project_path)
+        run(["make", "dist"], result.project_path)
+
+
+def test_bake_and_make_py311(cookies):
+    context = {
+        "python_version": "3.11",
+        "black_target": "py311",
+        "pytest_target": "py311",
+    }
+    with bake(cookies, extra_context=context) as result:
         assert result.exit_code == 0
         assert result.exception is None
         assert result.project_path.is_dir()

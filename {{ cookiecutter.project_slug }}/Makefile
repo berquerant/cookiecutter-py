@@ -5,6 +5,7 @@ test:
 
 .PHONY: fix
 fix:
+	@pipenv run isort tests {{ cookiecutter.project_slug }}
 	@pipenv run black tests {{ cookiecutter.project_slug }}
 
 .PHONY: clean

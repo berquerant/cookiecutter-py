@@ -4,7 +4,7 @@
 
 - Manage dependencies (pipenv)
 - Unit test (pytest)
-- Format code (black)
+- Format code (black, isort)
 - Lint (mypy, flake8)
 
 ## Requirements
