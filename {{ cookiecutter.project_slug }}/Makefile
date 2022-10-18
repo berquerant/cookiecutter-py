@@ -1,12 +1,11 @@
-.PHONY: test
-test:
-	@pipenv run check
-	@pipenv run test
+.PHONY: ci
+ci:
+	@pipenv run ci
 
 .PHONY: fix
 fix:
-	@pipenv run isort tests {{ cookiecutter.project_slug }}
-	@pipenv run black tests {{ cookiecutter.project_slug }}
+	@pipenv run ist
+	@pipenv run fmt
 
 .PHONY: clean
 clean:
@@ -16,17 +15,17 @@ clean:
 	@find . -name "*.pyc" -delete
 	@find . -name "__pycache__" -exec rm -rf {} +
 
-.PHONY: develop
-develop:
-	@python setup.py develop
+.PHONY: dev
+dev:
+	@pipenv run dev
 
 .PHONY: install
 install: clean
-	@python setup.py install
+	@pipenv run install
 
 .PHONY: dist
 dist: clean
-	@python setup.py sdist
+	@pipenv run dist
 	@ls -al dist
 
 .PHONY: init
