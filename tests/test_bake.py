@@ -43,7 +43,9 @@ def check_result(result):
     run(["pipenv", "install", "--dev"], project_path)
     run(["pipenv", "run", "check"], project_path)
     run(["pipenv", "run", "test"], project_path)
-    run(["python", "setup.py", "sdist"], project_path)
+    run(["pipenv", "run", "dev"], project_path)
+    run(["pipenv", "run", "install"], project_path)
+    run(["pipenv", "run", "dist"], project_path)
 
 
 def test_bake_and_make_default(cookies):
