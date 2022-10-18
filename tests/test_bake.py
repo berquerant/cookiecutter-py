@@ -40,12 +40,11 @@ def check_result(result):
     assert result.project_path.is_dir()
     assert result.project_path.name == "python_project_template"
     project_path = result.project_path
+
     run(["pipenv", "install", "--dev"], project_path)
-    run(["pipenv", "run", "check"], project_path)
-    run(["pipenv", "run", "test"], project_path)
-    run(["pipenv", "run", "dev"], project_path)
-    run(["pipenv", "run", "install"], project_path)
-    run(["pipenv", "run", "dist"], project_path)
+    scripts = ["check", "fmt", "test", "ci", "dev", "install", "dist"]
+    for x in scripts:
+        run(["pipenv", "run", x], project_path)
 
 
 def test_bake_and_make_default(cookies):
