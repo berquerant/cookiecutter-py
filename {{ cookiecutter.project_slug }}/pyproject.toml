@@ -6,14 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "{{ cookiecutter.project_slug }}"
 description = "{{ cookiecutter.project_description }}"
 {% if cookiecutter.author_name and cookiecutter.author_email -%}
-authors = [
-  {name = {{ cookiecutter.author_name }}, email = {{ cookiecutter.author_email }}}
-]
+authors = [{ name = {{ cookiecutter.author_name }}, email = {{ cookiecutter.author_email }} }]
 {%- endif %}
 readme = "README.md"
 version = "{{ cookiecutter.version }}"
 requires-python = ">={{ cookiecutter.python_version }}"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 classifiers = [
     "Programming Language :: Python :: 3",
     "Intended Audience :: Developers"

@@ -52,7 +52,6 @@ def test_bake_and_make_default(cookies):
         check_result(result)
 
 
-@pytest.mark.skip(reason="no python311 image for CI")
 def test_bake_and_make_py311(cookies):
     context = {
         "python_version": "3.11",
