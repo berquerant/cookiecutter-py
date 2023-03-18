@@ -21,5 +21,6 @@
     "py310",
     "py311"
   ],
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "main_branch": "main"
 }
