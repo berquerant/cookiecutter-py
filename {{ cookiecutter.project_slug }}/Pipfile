@@ -7,7 +7,6 @@ name = "pypi"
 
 [dev-packages]
 pytest = "*"
-pytest-cov = "*"
 flake8 = "*"
 isort = "*"
 pyproject-flake8 = "*"
