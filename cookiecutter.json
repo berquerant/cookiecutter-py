@@ -10,17 +10,14 @@
     "Library"
   ],
   "python_version": [
-    "3.10",
-    "3.11"
+    "3.12"
   ],
   "black_target": [
-    "py310",
-    "py311"
+    "py312",
   ],
   "pytest_target": [
-    "py310",
-    "py311"
+    "py312"
   ],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main_branch": "main"
 }
