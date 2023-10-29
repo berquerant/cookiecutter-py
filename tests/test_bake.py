@@ -4,7 +4,6 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Union
 
-import pytest
 from cookiecutter.utils import rmtree
 
 
@@ -52,12 +51,11 @@ def test_bake_and_make_default(cookies):
         check_result(result)
 
 
-@pytest.mark.skip(reason="no python311 image for CI")
-def test_bake_and_make_py311(cookies):
+def test_bake_and_make_py312(cookies):
     context = {
-        "python_version": "3.11",
-        "black_target": "py311",
-        "pytest_target": "py311",
+        "python_version": "3.12",
+        "black_target": "py312",
+        "pytest_target": "py312",
     }
     with bake(cookies, extra_context=context) as result:
         check_result(result)
