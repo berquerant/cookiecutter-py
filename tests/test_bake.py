@@ -2,9 +2,9 @@ import os
 import subprocess
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Union
+from tempfile import TemporaryDirectory
 
-from cookiecutter.utils import rmtree
+from cookiecutter.main import cookiecutter
 
 
 @contextmanager
@@ -17,45 +17,32 @@ def cd(p: Path):
         os.chdir(str(now))
 
 
-@contextmanager
-def bake(cookies, *args, **kwrags):
-    r = cookies.bake(*args, **kwrags)
-    try:
-        yield r
-    finally:
-        rmtree(str(r.project_path))
+def bake(template: str, output_dir: str, *args, **kwargs):
+    cookiecutter(
+        template=template,
+        output_dir=output_dir,
+        no_input=True,
+        *args,
+        **kwargs,
+    )
 
 
 def run(
-    cmd: Union[str, list[str]], dir: Path, *args, **kwargs
+    cmd: str | list[str], pwd: Path, *args, **kwargs
 ) -> subprocess.CompletedProcess:
-    with cd(dir):
+    with cd(pwd):
         return subprocess.run(cmd, check=True, *args, **kwargs)
 
 
-def check_result(result):
-    assert result.exit_code == 0
-    assert result.exception is None
-    assert result.project_path.is_dir()
-    assert result.project_path.name == "python_project_template"
-    project_path = result.project_path
-
-    run(["pipenv", "install", "--dev"], project_path)
-    scripts = ["check", "fmt", "test", "ci", "dev", "install", "dist"]
+def check_result(pwd: Path):
+    run(["pipenv", "install", "--dev"], pwd)
+    scripts = ["ci", "install", "dist"]
     for x in scripts:
-        run(["pipenv", "run", x], project_path)
+        run(["pipenv", "run", x], pwd)
 
 
-def test_bake_and_make_default(cookies):
-    with bake(cookies) as result:
-        check_result(result)
-
-
-def test_bake_and_make_py312(cookies):
-    context = {
-        "python_version": "3.12",
-        "black_target": "py312",
-        "pytest_target": "py312",
-    }
-    with bake(cookies, extra_context=context) as result:
-        check_result(result)
+def test_bake_and_make_default():
+    template = str(Path(__file__).parent.parent)
+    with TemporaryDirectory() as tdir:
+        bake(template=template, output_dir=tdir)
+        check_result(Path(tdir) / "python_project_template")

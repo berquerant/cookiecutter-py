@@ -6,23 +6,20 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+setuptools = "*"
 pytest = "*"
-flake8 = "*"
-isort = "*"
-pyproject-flake8 = "*"
 black = "*"
 tox = "*"
 mypy = "*"
-pyparsing = "*"
+ruff = "*"
 
 [requires]
 python_version = "{{ cookiecutter.python_version }}"
 
 [scripts]
-check = "tox -e isort,black,flake8,mypy -p 4"
+check = "tox -e black,ruff,mypy -p 3"
 test = "tox -e {{ cookiecutter.pytest_target }}"
-ci = "tox -e isort,black,flake8,mypy,{{ cookiecutter.pytest_target }} -p 4"
-fmt = "tox -e fmt"
+ci = "tox -e black,ruff,mypy,{{ cookiecutter.pytest_target }} -p 4"
 dev = "pip install --editable ."
 install = "pip install ."
 dist = "python setup.py sdist"

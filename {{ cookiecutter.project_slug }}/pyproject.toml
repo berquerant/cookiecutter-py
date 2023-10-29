@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -29,21 +29,43 @@ exclude = ["build", "tests"]
 {{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:main"
 {%- endif %}
 
-[tool.black]
-line-length = 120
-target-version = ["{{ cookiecutter.black_target }}"]
-
-[tool.flake8]
-max-line-length = 120
-ignore = [
-  "E203",
-  "W503",
-  "W504"
+[tool.ruff]
+select = [
+  "F", # pyflakes
+  "I", # isort
+  "E", # pydocstyle
+  "D",
+  "W",
 ]
-statistics = true
+ignore = ["D203", "D212"]
+exclude = [
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".mypy_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".tox",
+    "__pypackages__",
+    "_build",
+    "build",
+    "dist",
+    ".ropeproject",
+    ".pytest_cache",
+    "__pycache__",
+    ".coverage",
+]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"**/{tests,doc}/*" = ["D"]
 
 [tool.mypy]
 ignore_missing_imports = true
 
-[tool.isort]
-profile = "black"
+[tool.black]
+line-length = 120
+target-version = ["{{ cookiecutter.black_target }}"]
