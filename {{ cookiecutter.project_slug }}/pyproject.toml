@@ -65,6 +65,9 @@ target-version = "py312"
 
 [tool.mypy]
 ignore_missing_imports = true
+show_error_context = true
+show_column_numbers = true
+pretty = true
 
 [tool.black]
 line-length = 120
