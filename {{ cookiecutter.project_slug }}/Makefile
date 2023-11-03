@@ -2,6 +2,10 @@
 init:
 	@pipenv install --dev
 
+.PHONY: ci
+ci:
+	@pipenv run ci
+
 {% raw %}
 .PHONY: clean
 clean:
