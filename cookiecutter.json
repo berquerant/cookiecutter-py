@@ -12,9 +12,7 @@
   "python_version": [
     "3.12"
   ],
-  "black_target": [
-    "py312"
-  ],
+  "_black_target": "py312",
   "pytest_target": [
     "py312"
   ],
