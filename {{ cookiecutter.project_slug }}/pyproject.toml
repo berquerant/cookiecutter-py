@@ -80,4 +80,3 @@ pretty = true
 
 [tool.black]
 line-length = 120
-target-version = ["{{ cookiecutter._black_target }}"]
