@@ -13,9 +13,7 @@
     "3.12"
   ],
   "_black_target": "py312",
-  "pytest_target": [
-    "py312"
-  ],
+  "_pytest_target": "py312",
   "version": "0.1.0",
   "main_branch": "main"
 }

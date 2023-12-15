@@ -18,8 +18,8 @@ python_version = "{{ cookiecutter.python_version }}"
 
 [scripts]
 check = "tox -e black,ruff,mypy -p 3"
-test = "tox -e {{ cookiecutter.pytest_target }}"
-ci = "tox -e black,ruff,mypy,{{ cookiecutter.pytest_target }} -p 4"
+test = "tox -e {{ cookiecutter._pytest_target }}"
+ci = "tox -e black,ruff,mypy,{{ cookiecutter._pytest_target }} -p 4"
 dev = "pip install --editable ."
 install = "pip install ."
 dist = "python setup.py sdist"
