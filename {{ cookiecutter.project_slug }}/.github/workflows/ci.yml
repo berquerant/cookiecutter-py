@@ -8,7 +8,8 @@ on:
     branches:
       - {{ cookiecutter.main_branch }}
   pull_request:
-
+    branches:
+      - {{ cookiecutter.main_branch }}
 {% raw %}
 jobs:
   build:
@@ -19,7 +20,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
+{%- endraw %}
           python-version: "{{ cookiecutter.python_version }}"
+{%- raw %}
           cache: "pipenv"
       - name: Install pipenv
         run: pip install pipenv
@@ -27,4 +30,4 @@ jobs:
         run: pipenv sync --dev
       - name: Test
         run: make ci
-{% endraw %}
+{%- endraw %}
