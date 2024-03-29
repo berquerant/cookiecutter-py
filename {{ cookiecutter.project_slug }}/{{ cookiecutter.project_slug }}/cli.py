@@ -1,5 +1,5 @@
 """Entry point of CLI."""
-{% if cookiecutter.project_category == "Command-Line" -%}
+{% if cookiecutter.project_category == "Command-Line" %}
 import argparse
 
 
