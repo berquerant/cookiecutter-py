@@ -30,4 +30,6 @@ jobs:
         run: pipenv sync --dev
       - name: Test
         run: make ci
+      - name: Vuln
+        run: make vuln
 {%- endraw %}

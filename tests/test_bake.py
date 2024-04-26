@@ -39,6 +39,7 @@ def run(
 
 def check_result(pwd: Path):
     run(["pipenv", "install", "--dev"], pwd)
+    run(["pipenv", "check"], pwd)
     scripts = ["ci", "install", "dist"]
     for x in scripts:
         run(["pipenv", "run", x], pwd)

@@ -6,6 +6,10 @@ init:
 ci:
 	@pipenv run ci
 
+.PHONY: vuln
+vuln:
+	@pipenv check
+
 {% raw %}
 .PHONY: clean
 clean:
