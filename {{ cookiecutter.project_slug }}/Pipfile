@@ -17,9 +17,9 @@ ruff = "*"
 python_version = "{{ cookiecutter.python_version }}"
 
 [scripts]
-check = "tox -e black,ruff,mypy -p 3"
-test = "tox -e {{ cookiecutter.__pytest_target }}"
-ci = "tox -e black,ruff,mypy,{{ cookiecutter.__pytest_target }} -p 4"
+check = "tox run-parallel -m check --parallel-no-spinner"
+test = "tox run-parallel -m test --parallel-no-spinner"
+ci = "tox run-parallel -m ci --parallel-no-spinner"
 dev = "pip install --editable ."
 install = "pip install ."
 dist = "python setup.py sdist"
