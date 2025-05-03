@@ -9,6 +9,7 @@ name = "pypi"
 pytest = "*"
 cookiecutter = "*"
 pyyaml = "*"
+safety = "*"
 
 [requires]
 python_version = "3.13"
