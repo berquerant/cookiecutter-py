@@ -1,21 +1,19 @@
-.PHONY: init
 init:
-	@pipenv install --dev
+	@uv sync
 
-.PHONY: ci
+check:
+	uv run tox -e black,ruff,mypy -p 3
+
+test:
+	uv run tox -e {{ cookiecutter.__pytest_target }}
+
 ci:
-	@pipenv run ci
+	uv run tox -e black,ruff,mypy,{{ cookiecutter.__pytest_target }} -p 4
 
-.PHONY: vuln
-vuln:
-	@pipenv check
+dev:
+	uv run pip install --editable .
 
-{% raw %}
-.PHONY: clean
-clean:
-	@rm -rf build dist .pytest_cache .tox
-	@find . -name "*.egg" -exec rm -rf {} +
-	@find . -name "*.egg-info" -exec rm -rf {} +
-	@find . -name "*.pyc" -delete
-	@find . -name "__pycache__" -exec rm -rf {} +
-{% endraw %}
+install:
+	pip install .
+
+.PHONY: init check test ci dev install

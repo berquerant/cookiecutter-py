@@ -1,11 +1,7 @@
-.PHONY: test
-test:
-	@pipenv run test
-
-.PHONY: vuln
-vuln:
-	@pipenv check
-
-.PHONY: init
 init:
-	@pipenv install --dev
+	@uv sync
+
+test:
+	@uv run pytest -s -v --ff --doctest-modules tests
+
+.PHONY: init test

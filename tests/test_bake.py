@@ -1,11 +1,11 @@
+import glob
 import os
 import subprocess
 from contextlib import contextmanager
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import glob
-import yaml
 
+import yaml
 from cookiecutter.main import cookiecutter
 
 
@@ -38,11 +38,9 @@ def run(
 
 
 def check_result(pwd: Path):
-    run(["pipenv", "install", "--dev"], pwd)
-    run(["pipenv", "check"], pwd)
-    scripts = ["ci", "install", "dist"]
-    for x in scripts:
-        run(["pipenv", "run", x], pwd)
+    run(["make", "init"], pwd)
+    run(["make", "check"], pwd)
+    run(["make", "test"], pwd)
 
     with cd(pwd):
         print("[check] all cookiecutter has been replaced")

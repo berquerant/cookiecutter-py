@@ -9,4 +9,4 @@
 
 ## Requirements
 
-- [pipenv](https://pipenv.pypa.io/en/latest/)
+- [uv](https://github.com/astral-sh/uv)
