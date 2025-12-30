@@ -10,7 +10,7 @@
     "Library"
   ],
   "python_version": [
-    "3.13"
+    "3.14"
   ],
   "__pytest_target": "py{{ cookiecutter.python_version.replace('.', '') }}",
   "version": "0.1.0",
